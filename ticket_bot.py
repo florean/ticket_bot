@@ -28,7 +28,14 @@ def main():
             event_date = event[DATE_KEY]
             if event_status == ON_SALE_STATUS:
                 msg = "{} tickets are available! ({})".format(event_date, event_status)
+                send_msg(api, msg)
 
+
+def send_msg(api, msg):
+    try:
+        status = api.send_direct_message(screen_name="florean", text=msg)
+    except tweepy.error.TweepError as e:
+        print(repr(e))
 
 
 if __name__ == '__main__':
