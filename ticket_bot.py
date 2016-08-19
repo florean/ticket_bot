@@ -20,13 +20,15 @@ def main():
     auth.set_access_token(secrets['access_token'], secrets['access_secret'])
     api = tweepy.API(auth)
 
+    ticket_dates = {}
     # Loop forever
     while True:
         ticket_json = requests.get(TICKET_URL).json()
         for event in ticket_json['times']:
             event_status = event[EVENT_STATUS_KEY]
             event_date = event[DATE_KEY]
-            if event_status == ON_SALE_STATUS:
+            if event_status == ON_SALE_STATUS and event_date not in ticket_dates:
+                ticket_dates[event_date] = True
                 msg = "{} tickets are available! ({})".format(event_date, event_status)
                 send_msg(api, msg)
 
