@@ -1,5 +1,6 @@
 #!/usr/local/virtualenvs/ds-py3/bin/python
 import json
+from time import sleep
 
 import requests
 import tweepy
@@ -12,6 +13,7 @@ DATE_KEY = "time"
 ON_SALE_STATUS = "on_sale"
 SOLD_OUT_STATUS = "sold_out"
 POST_SALE_STATUS = "post_sale"
+CHECK_INTERVAL = 5
 
 
 def main():
@@ -38,6 +40,7 @@ def main():
                 del ticket_dates[event_date]
                 msg = "{} tickets are no longer available. ({})".format(event_date, event_status)
                 send_msg(api, msg)
+        sleep(CHECK_INTERVAL)
 
 
 def send_msg(api, msg):
