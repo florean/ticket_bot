@@ -10,6 +10,8 @@ TICKET_URL = "http://www.showclix.com/event/TheDailyShowWithTrevorNoah/recurring
 EVENT_STATUS_KEY = "event_status"
 DATE_KEY = "time"
 ON_SALE_STATUS = "on_sale"
+SOLD_OUT_STATUS = "sold_out"
+POST_SALE_STATUS = "post_sale"
 
 
 def main():
@@ -30,6 +32,11 @@ def main():
             if event_status == ON_SALE_STATUS and event_date not in ticket_dates:
                 ticket_dates[event_date] = True
                 msg = "{} tickets are available! ({})".format(event_date, event_status)
+                send_msg(api, msg)
+            elif (event_status in (SOLD_OUT_STATUS, POST_SALE_STATUS) and
+                    event_date in ticket_dates):
+                del ticket_dates[event_date]
+                msg = "{} tickets are no longer available. ({})".format(event_date, event_status)
                 send_msg(api, msg)
 
 
