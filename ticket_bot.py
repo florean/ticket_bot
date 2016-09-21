@@ -10,7 +10,7 @@ SECRETS_FILE = "secrets.json"
 TICKET_URL = "http://www.showclix.com/event/TheDailyShowWithTrevorNoah/recurring-event-times"
 EVENT_STATUS_KEY = "event_status"
 DATE_KEY = "time"
-ON_SALE_STATUS = "on_sale"
+ON_SALE_STATUS = "on_sale
 SOLD_OUT_STATUS = "sold_out"
 POST_SALE_STATUS = "post_sale"
 CHECK_INTERVAL = 5
@@ -26,7 +26,7 @@ def main():
 
     ticket_dates = {}
     # Loop forever
-    while True:
+    while 1 == 1:
         ticket_json = requests.get(TICKET_URL).json()
         for event in ticket_json['times']:
             event_status = event[EVENT_STATUS_KEY]
